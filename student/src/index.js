@@ -11,7 +11,10 @@ import Courses from './components/Courses';
 import Footer from './components/Footer';
 import Register from './screens/Register';
 import Activate from './screens/Activate';
-import { signout } from './helpers/auth';
+import ForgetPassword from './screens/ForgetPassword';
+import ResetPassword from './screens/ResetPassword';
+import ProtectedRoute from './ProtectedRoute';
+import Profiledit from'./components/Profiledit';
 ReactDOM.render(
   <BrowserRouter>
   <div>
@@ -20,12 +23,21 @@ ReactDOM.render(
   
   <Route  path='/' exact render={props => <Home {...props}/>}/> 
   <Route  path='/Login' render={props => <Login {...props}/>}/>
-  <Route  path='/Profile' render={props => <Profile {...props}/>}/>
-  <Route  path='/About'  render={props => <About {...props}/>}/>
-  <Route  path='/Courses' render={props => <Courses {...props}/>}/>
   <Route  path='/Register' render={props => <Register {...props}/>}/>
   <Route  path='/users/activate/:token' exact render={props => <Activate {...props}/>}/>
+  <Route path='/users/password/forget' exact render={props =><ForgetPassword {...props}/>}/>
+  <Route path='/users/password/reset/:token' exact render={props =><ResetPassword {...props}/>}/>
+
+
+  <Route  path='/Profile' exact render={props => <Profile {...props}/>}/>
+  <Route  path='/About'  render={props => <About {...props}/>}/>
+  <Route  path='/Courses' render={props => <Courses {...props}/>}/>
+
+  <Route  path='/Profile/Profiledit' render={props => <Profiledit {...props}/>}/>      
+          
   <Route  path='/signout' render={props => <signout {...props}/>}/>
+       
+  
   </Switch>
   <Footer/>
   </div>

@@ -1,9 +1,18 @@
 
 import img from '../images/main_img.jpg';
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
+import {signout, isAuth} from '../helpers/auth';
 import '../index.css';
 
 const Home = () => {
+    const history = useHistory();
+
+    const logout=e=>{
+        e.preventDefault();
+        alert("Logging out..");
+        signout();
+        history.replace('/');
+    }
 
     return ( 
     <div>
@@ -15,9 +24,12 @@ const Home = () => {
     </nav>
     <img src ={img}  alt="IMAGE" width="5800" />
     <nav className="nav2">
-        <Link to="/Contact" style={{fontSize: 150,  color:'black', border:'15px solid black'}}>Contact</Link>
+        {/*<Link to="/Contact" style={{fontSize: 150,  color:'black', border:'15px solid black'}}>Contact</Link>*/}
         <Link to='/FAQ' style={{fontSize: 150, color:'black',border:'15px solid black' }}>FAQ</Link>
-        <Link to='/Logout' style={{fontSize: 150, color:'black',border:'15px solid black' }}>Logout</Link>
+        {isAuth()!==false? <>
+        <Link href="#" style={{fontSize: 150, color:'black',border:'15px solid black' }} onClick={logout}>Signout</Link>
+        </>:<> 
+           </>}
     </nav>
     </div>
     

@@ -4,16 +4,30 @@ import { useEffect, useState } from 'react';
 import Eye from '../images/eye.png';
 import { useHistory } from "react-router-dom";
 import '../App.css'
+import axios from 'axios';
 
+function Courses() { 
+  const [Courses, setCourses] = useState([])
 
-  const Courses = ({}) => {
-    const CL = [{id:1,Title:"Calculas",Descrip:"Interesting"}];
-    useEffect(() => {
-      fetch('http://localhost:4000/Courses')
-        .then((data) => {
-          console.log(data);
-        })
-    }, []);
+  useEffect(()=>{
+    axios.get('http://localhost:4000/api/rout/Courses')
+      .then(res => {
+        console.log(res.data)
+        setCourses(res.data)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  }, [])
+    //const CL = [{id:1,Title:"Calculas",Descrip:"Interesting"}];
+   // useEffect(() => {
+     // fetch('/Courses')
+       // .then((data) => {
+         // console.log(data);
+        //})
+
+        //`${process.env.REACT_PAGE_API_URL}/Courses`
+    //}, []);
 
 
 
@@ -22,20 +36,20 @@ import '../App.css'
                   <h1>Courses</h1>
               </div>
   {/*<img src ={img}  alt="IMAGE" width="5800"/>*/}
-            <div style={{}}>
+            
             <div style={{ display: 'flex', flexFlow: 'row wrap', gap: '100px', justifyContent:'center', position:'static'}}>
-             {CL.map(C=>(
+             {Courses.map(Course=>(
          
-              <div class="courseCard" key={C.id}>
+              <div class="courseCard" key={Course.id}>
               <div class="image">
               <img src="https://picsum.photos/300" alt="" />
               </div>
 
           <div class="wrapper">
             <input class="inpBox" id="cTitle"
-              placeholder="course name" value={C.Title}/>
+              placeholder="course name" value={Course.cname}/>
             <textarea class="inpBox"
-              placeholder="course description" value={C.Descript}/>
+              placeholder="course description" value={Course.descript}/>
             <table class="ctable">
               <tr><td>Duration</td><td>0 hrs</td></tr>
               <tr><td>Ratings</td><td>0 %</td></tr>
@@ -50,9 +64,9 @@ import '../App.css'
 
         ))}
         <div style={{width:'270px',height:'300px'}}>
-        <button class="addCourse"  title="Add New Course">+</button></div>
+        <button class="addCourse"  title="Enroll">+</button></div>
       </div>
-      </div>
+     
 
   </>
      );

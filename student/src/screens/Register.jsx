@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-//import authSvg from '../assests/auth.svg';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { isAuth } from '../helpers/auth';
 import {  Redirect } from 'react-router-dom';
-//import Navig from './Navigator';
-//import Footer from './Footer';
 import '../App.css';
-
 
 
 
@@ -64,7 +60,7 @@ function Register({history}) {
     }
     return (
         <>
-        {isAuth() ? <Redirect to='/builder' /> : null}
+        {isAuth() ? <Redirect to='/' /> : null}
         <ToastContainer />
         <div class="section" style={{paddingTop:"100px"}}>
           <div class="container">

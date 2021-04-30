@@ -4,8 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import { authenticate, isAuth } from '../helpers/auth';
 import {  Redirect, Link } from 'react-router-dom';
-
-//import '../App.css';
+import '../App.css';
+import Profile from '../components/Profile';
 
 const Login = ({history}) => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -26,8 +26,11 @@ const Login = ({history}) => {
                     authenticate(res,()=>{
                     setFormData({ ...formData, email: '', password: '' });
                     toast.success(`Hey ${res.data.user.name}, Welcome back!`);
+
+
+                    <Profile formData={email} />
                     /**isAuth() !==false? console.log('authen'):console.log('nope');*/
-                    isAuth() !==false? history.push('/builder'): history.push('/');
+                    isAuth() !==false? history.push('/rout'): history.push('/');
                     })
                     
                 })
@@ -49,10 +52,10 @@ const Login = ({history}) => {
         <>
             <ToastContainer />
             
-            <div class="section" style={{paddingTop:"70px"}}>
+            <div class="section" style={{paddingTop:"250px"}}>
           <div class="container">
           <div class="formBox">
-          <div class="sectionHead" style={{marginBottom:"35px", fontSize:"25px"}}>SIGN IN</div>
+          <div class="sectionHead" style={{marginBottom:"80px", fontSize:"90px"}}><b>SIGN IN</b></div>
           <div class="formWrapper">
           <form onSubmit={handleSubmit}>
                 
@@ -70,12 +73,12 @@ const Login = ({history}) => {
                     value={password}
                   />
                   
-                  <button type='submit' class="button" style={{width:"100%", margin:"0px", marginBottom:"20px", backgroundColor:"#2e9dff"}}>Log In</button>
+                  <button type='submit' class="but" style={{width:"80%", margin:"0px", marginBottom:"60px", backgroundColor:"rgb(201, 173, 173"}}>Log In</button>
             </form>
 
             <br />
-          <div style={{alignItems:"center", display:"inline-flex",marginBottom:"30px", width:"100%"}}>
-              <div style={{flexGrow:"1", minWidth:"fit-content"}}><Link to='/users/password/forget' class="navigation-link" style={{padding:"0px"}}>forgot password? </Link></div>&nbsp;or
+          <div style={{alignItems:'center', display:"inline-flex",marginBottom:"40px", width:"100%"}}>
+              <div style={{flexGrow:"1", minWidth:"fit-content"}}><Link to='/users/password/forget' class="navigation-link" style={{padding:"0px"}}>forgot password? </Link></div>&nbsp;<br/><b style={{fontSize:'80px'}}>or</b>
               <div style={{flexGrow:"1", minWidth:"fit-content"}}>
                   <Link to='/register' class="link-button">Sign Up</Link>
               </div>
@@ -93,7 +96,7 @@ const Login = ({history}) => {
     }
     else
     {
-        return(<Redirect to='/builder' />);
+        return(<Redirect to='/rout' />);
     }
 }
 
